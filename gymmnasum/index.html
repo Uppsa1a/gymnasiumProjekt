@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaErMi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to DaErMi</h1>
+    <p>Contact us at: info@daermi.com</p>
+    
+    <div class="card">
+        <h2>DaErMi Image AI</h2>
+        <img id="unsplashImage" src="" alt="Random from Unsplash" style="width: 100%; border-radius: 8px;">
+    </div>
+    
+    <a href="../gymmnasum/2048/index.html" class="button">Math</a>
+
+    <script>
+      fetch("https://api.unsplash.com/photos/random?client_id=EP3NaxIaH3qUWlxI4zQd2hxb3u92_HTrl3G6ZisPtOU")
+          .then(response => response.json())  
+          .then(data => {
+              document.getElementById("unsplashImage").src = data.urls.regular;
+          })
+          .catch(error => console.error("Error fetching image:", error));
+  </script>
+</body>
+</html>
