@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaErMi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 10px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to DaErMi</h1>
+    <p></p>
+    
+    <div>
+        <input type="text" id="query" placeholder="Enter topic">
+        <button class="button" onclick="fetchImage()">Search</button>
+    </div>
+    
+    <div class="card">
+        <h2>DaErMi Image Database</h2>
+        <img id="unsplashImage" src="" alt="Image from Unsplash" style="width: 100%; border-radius: 8px;">
+    </div>
+    
+    <button class="button" onclick="fetchImage()">Next Image</button>
+    
+    <script>
+        function fetchImage() {
+            const query = document.getElementById("query").value || "random";
+            fetch(`https://api.unsplash.com/search/photos?query=${query}&client_id=EP3NaxIaH3qUWlxI4zQd2hxb3u92_HTrl3G6ZisPtOU`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.results.length > 0) {
+                        document.getElementById("unsplashImage").src = data.results[Math.floor(Math.random() * data.results.length)].urls.regular;
+                    } else {
+                        alert("No images found for this topic.");
+                    }
+                })
+                .catch(error => console.error("Error fetching image:", error));
+        }
+        
+        // Load a random image on page load
+        fetchImage();
+    </script>
+</body>
+</html>
